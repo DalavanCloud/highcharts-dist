@@ -1,5 +1,5 @@
 /**
- * @license Highstock JS v5.0.11 (2017-05-04)
+ * @license Highstock JS v5.0.11 (2018-09-19)
  *
  * (c) 2009-2016 Torstein Honsi
  *
@@ -359,7 +359,8 @@
                  */
                 function insertSlice(arr, subArr, index) {
                     [].splice.apply(
-                        arr, [index, 0].concat(subArr)
+                        arr,
+                        [index, 0].concat(subArr)
                     );
                 }
 
@@ -1227,7 +1228,8 @@
             // Multiply back to the correct magnitude. Correct floats to appropriate 
             // precision (#6085).
             retInterval = H.correctFloat(
-                retInterval * magnitude, -Math.round(Math.log(0.001) / Math.LN10)
+                retInterval * magnitude,
+                -Math.round(Math.log(0.001) / Math.LN10)
             );
 
             return retInterval;
@@ -2081,7 +2083,7 @@
                     alias = {
                         width: 'clientWidth',
                         height: 'clientHeight'
-                    }[prop];
+                    } [prop];
 
                 if (el.style[prop]) {
                     return H.pInt(el.style[prop]);
@@ -5561,7 +5563,7 @@
                         textX += {
                             center: 0.5,
                             right: 1
-                        }[textAlign] * (width - bBox.width);
+                        } [textAlign] * (width - bBox.width);
                     }
 
                     // update if anything changed
@@ -5644,7 +5646,7 @@
                         left: 0,
                         center: 0.5,
                         right: 1
-                    }[value];
+                    } [value];
                     if (value !== alignFactor) {
                         alignFactor = value;
                         if (bBox) { // Bounding box exists, means we're dynamically changing
@@ -5862,7 +5864,7 @@
                         left: 0,
                         center: 0.5,
                         right: 1
-                    }[align],
+                    } [align],
                     styles = wrapper.styles;
 
                 // apply translate
@@ -6587,7 +6589,7 @@
                         left: 0,
                         center: 0.5,
                         right: 1
-                    }[axis.labelAlign],
+                    } [axis.labelAlign],
                     labelWidth = label.getBBox().width,
                     slotWidth = axis.getSlotWidth(),
                     modifiedSlotWidth = slotWidth,
@@ -7345,7 +7347,8 @@
             setOptions: function(userOptions) {
                 this.options = merge(
                     this.defaultOptions,
-                    this.coll === 'yAxis' && this.defaultYAxisOptions, [
+                    this.coll === 'yAxis' && this.defaultYAxisOptions,
+                    [
                         this.defaultTopAxisOptions,
                         this.defaultRightAxisOptions,
                         this.defaultBottomAxisOptions,
@@ -7462,7 +7465,8 @@
                                 // do this after we have already found seriesDataMin
                                 // because in most cases all data is valid. #5234.
                                 seriesDataMin = arrayMin(xData);
-                                if (!isNumber(seriesDataMin) &&
+                                if (
+                                    !isNumber(seriesDataMin) &&
                                     !(seriesDataMin instanceof Date) // #5010
                                 ) {
                                     xData = grep(xData, function(x) {
@@ -7511,7 +7515,8 @@
                                 axis.threshold = threshold;
                             }
                             // If any series has a hard threshold, it takes precedence
-                            if (!seriesOptions.softThreshold ||
+                            if (
+                                !seriesOptions.softThreshold ||
                                 axis.positiveValuesOnly
                             ) {
                                 axis.softThreshold = false;
@@ -7603,7 +7608,8 @@
             toValue: function(pixel, paneCoordinates) {
                 return this.translate(
                     pixel - (paneCoordinates ? 0 : this.pos),
-                    true, !this.horiz,
+                    true,
+                    !this.horiz,
                     null,
                     true
                 );
@@ -7858,7 +7864,8 @@
                             visible = series.visible ||
                             !series.chart.options.chart.ignoreHiddenSeries;
 
-                        if (!series.noSharedTooltip &&
+                        if (
+                            !series.noSharedTooltip &&
                             defined(seriesClosest) &&
                             visible
                         ) {
@@ -8224,7 +8231,8 @@
                         getMagnitude(axis.tickInterval),
                         // If the tick interval is between 0.5 and 5 and the axis max is in the order of
                         // thousands, chances are we are dealing with years. Don't allow decimals. #3363.
-                        pick(options.allowDecimals, !(axis.tickInterval > 0.5 && axis.tickInterval < 5 && axis.max > 1000 && axis.max < 9999)), !!this.tickAmount
+                        pick(options.allowDecimals, !(axis.tickInterval > 0.5 && axis.tickInterval < 5 && axis.max > 1000 && axis.max < 9999)),
+                        !!this.tickAmount
                     );
                 }
 
@@ -8866,10 +8874,12 @@
                     (labelOptions.step || 0) < 2 &&
                     !labelOptions.rotation && // #4415
                     ((this.staggerLines || 1) * this.len) / slotCount
-                ) || (!horiz && (
-                    (marginLeft && (marginLeft - chart.spacing[3])) ||
-                    chart.chartWidth * 0.33
-                )); // #1580, #1931
+                ) || (
+                    !horiz && (
+                        (marginLeft && (marginLeft - chart.spacing[3])) ||
+                        chart.chartWidth * 0.33
+                    )
+                ); // #1580, #1931
 
             },
 
@@ -9138,7 +9148,7 @@
                     if (labelOptions.reserveSpace !== false && (side === 0 || side === 2 || {
                             1: 'left',
                             3: 'right'
-                        }[side] === axis.labelAlign || axis.labelAlign === 'center')) {
+                        } [side] === axis.labelAlign || axis.labelAlign === 'center')) {
                         each(tickPositions, function(pos) {
 
                             // get the highest offset
@@ -9282,7 +9292,7 @@
                         low: margin + (horiz ? 0 : axisLength),
                         middle: margin + axisLength / 2,
                         high: margin + (horiz ? axisLength : 0)
-                    }[axisTitleOptions.align],
+                    } [axisTitleOptions.align],
 
                     // the position in the perpendicular direction of the axis
                     offAxis = (horiz ? axisTop + this.height : axisLeft) +
@@ -9872,22 +9882,28 @@
                         [1, 2, 5, 10, 20, 25, 50, 100, 200, 500] // allowed multiples
                     ],
                     [
-                        'second', [1, 2, 5, 10, 15, 30]
+                        'second',
+                        [1, 2, 5, 10, 15, 30]
                     ],
                     [
-                        'minute', [1, 2, 5, 10, 15, 30]
+                        'minute',
+                        [1, 2, 5, 10, 15, 30]
                     ],
                     [
-                        'hour', [1, 2, 3, 4, 6, 8, 12]
+                        'hour',
+                        [1, 2, 3, 4, 6, 8, 12]
                     ],
                     [
-                        'day', [1, 2]
+                        'day',
+                        [1, 2]
                     ],
                     [
-                        'week', [1, 2]
+                        'week',
+                        [1, 2]
                     ],
                     [
-                        'month', [1, 2, 3, 4, 6]
+                        'month',
+                        [1, 2, 3, 4, 6]
                     ],
                     [
                         'year',
@@ -10190,7 +10206,7 @@
 
                 // the plot band/line label
                 if (optionsLabel && defined(optionsLabel.text) && path && path.length &&
-                    axis.width > 0 && axis.height > 0 && !path.flat) {
+                    axis.width > 0 && axis.height > 0 && !path.isFlat) {
                     // apply defaults
                     optionsLabel = merge({
                         align: horiz && isBand && 'center',
@@ -10297,14 +10313,16 @@
 
                     // Flat paths don't need labels (#3836)
                     if (outside) {
-                        path.flat = path.toString() === toPath.toString();
+                        path.isFlat = path.toString() === toPath.toString();
                         plus = 0;
                     }
 
                     // Add 1 pixel, when coordinates are the same
                     path.push(
-                        horiz && toPath[4] === path[4] ? toPath[4] + plus : toPath[4], !horiz && toPath[5] === path[5] ? toPath[5] + plus : toPath[5],
-                        horiz && toPath[1] === path[1] ? toPath[1] + plus : toPath[1], !horiz && toPath[2] === path[2] ? toPath[2] + plus : toPath[2]
+                        horiz && toPath[4] === path[4] ? toPath[4] + plus : toPath[4],
+                        !horiz && toPath[5] === path[5] ? toPath[5] + plus : toPath[5],
+                        horiz && toPath[1] === path[1] ? toPath[1] + plus : toPath[1],
+                        !horiz && toPath[2] === path[2] ? toPath[2] + plus : toPath[2]
                     );
                 } else { // outside the axis area
                     path = null;
@@ -11381,7 +11399,8 @@
                     if (s.visible && !directTouch && pick(s.options.enableMouseTracking, true)) { // #3821
                         // #3828
                         kdpointT = s.searchPoint(
-                            e, !noSharedTooltip && s.options.findNearestPointBy.indexOf('y') < 0
+                            e,
+                            !noSharedTooltip && s.options.findNearestPointBy.indexOf('y') < 0
                         );
                         if (kdpointT && kdpointT.series) { // Point.series becomes null when reset and before redraw (#5197)
                             kdpoints.push(kdpointT);
@@ -11840,7 +11859,7 @@
                             if (axis.zoomEnabled && defined(axis.min) && (hasPinched || pointer[{
                                     xAxis: 'zoomX',
                                     yAxis: 'zoomY'
-                                }[axis.coll]])) { // #859, #3569
+                                } [axis.coll]])) { // #859, #3569
                                 var horiz = axis.horiz,
                                     minPixelPadding = e.type === 'touchend' ? axis.minPixelPadding : 0, // #1207, #3075
                                     selectionMin = axis.toValue((horiz ? selectionLeft : selectionTop) + minPixelPadding),
@@ -11982,7 +12001,8 @@
 
                 if (series && relatedTarget && !series.stickyTracking &&
                     !this.inClass(relatedTarget, 'highcharts-tooltip') &&
-                    (!this.inClass(relatedTarget, 'highcharts-series-' + series.index) || // #2499, #4465
+                    (
+                        !this.inClass(relatedTarget, 'highcharts-series-' + series.index) || // #2499, #4465
                         !this.inClass(relatedTarget, 'highcharts-tracker') // #5553
                     )
                 ) {
@@ -12920,7 +12940,8 @@
                     // Handle showInLegend. If the series is linked to another series,
                     // defaults to false.
                     if (series && pick(
-                            seriesOptions.showInLegend, !defined(seriesOptions.linkedTo) ? undefined : false, true
+                            seriesOptions.showInLegend,
+                            !defined(seriesOptions.linkedTo) ? undefined : false, true
                         )) {
 
                         // Use points or series for the legend item depending on
@@ -14455,7 +14476,8 @@
 
                 // Width and height checks for display:none. Target is doc in IE8 and
                 // Opera, win in Firefox, Chrome and IE9.
-                if (!hasUserWidth &&
+                if (
+                    !hasUserWidth &&
                     !chart.isPrinting &&
                     width &&
                     height &&
@@ -16211,7 +16233,8 @@
                                     series: series
                                 };
                                 series.pointClass.prototype.applyOptions.apply(
-                                    pt, [data[i]]
+                                    pt,
+                                    [data[i]]
                                 );
                                 series.updateParallelArrays(pt, i);
                             }
@@ -16461,7 +16484,8 @@
                     } else {
                         // splat the y data in case of ohlc data array
                         point = (new PointClass()).init(
-                            series, [processedXData[i]].concat(splat(processedYData[i]))
+                            series,
+                            [processedXData[i]].concat(splat(processedYData[i]))
                         );
                         point.dataGroup = series.groupMap[i];
                     }
@@ -16688,7 +16712,8 @@
                     // Set the the plotY value, reset it for redraws
                     point.plotY = plotY =
                         (typeof yValue === 'number' && yValue !== Infinity) ?
-                        Math.min(Math.max(-1e5,
+                        Math.min(Math.max(
+                            -1e5,
                             yAxis.translate(yValue, 0, 1, 0, 1)), 1e5) : // #3201
                         undefined;
 
@@ -16780,7 +16805,8 @@
                     if (animation) {
                         clipBox.width = 0;
 
-                        chart[sharedClipKey + 'm'] = markerClipRect = renderer.clipRect(-99, // include the width of the first marker
+                        chart[sharedClipKey + 'm'] = markerClipRect = renderer.clipRect(
+                            -99, // include the width of the first marker
                             inverted ? -chart.plotLeft : -chart.plotTop,
                             99,
                             inverted ? chart.chartWidth : chart.chartHeight
@@ -17092,7 +17118,7 @@
                 step = {
                     right: 1,
                     center: 2
-                }[step] || (step && 3);
+                } [step] || (step && 3);
                 if (step && reversed) {
                     step = 4 - step;
                 }
@@ -17456,7 +17482,8 @@
                     options = series.options,
                     // Animation doesn't work in IE8 quirks when the group div is
                     // hidden, and looks bad in other oldIE
-                    animDuration = (!!series.animate &&
+                    animDuration = (
+                        !!series.animate &&
                         chart.renderer.isSVG &&
                         animObject(options.animation).duration
                     ),
@@ -20673,7 +20700,8 @@
                         if (!dataLabel) {
                             dataLabel = point.dataLabel = renderer[rotation ? 'text' : 'label']( // labels don't support rotation
                                 str,
-                                0, -9999,
+                                0,
+                                -9999,
                                 options.shape,
                                 null,
                                 null,
@@ -20765,7 +20793,7 @@
                             top: 0,
                             middle: 0.5,
                             bottom: 1
-                        }[options.verticalAlign] * alignTo.height
+                        } [options.verticalAlign] * alignTo.height
                     };
                     dataLabel[isNew ? 'attr' : 'animate'](alignAttr)
                         .attr({ // #3003
@@ -21063,7 +21091,7 @@
                                 ({
                                     left: connectorPadding,
                                     right: -connectorPadding
-                                }[labelPos[6]] || 0),
+                                } [labelPos[6]] || 0),
                             y: y + options.y - 10 // 10 is for the baseline (label vs text)
                         };
                         labelPos.x = x;
@@ -21327,7 +21355,8 @@
                 // When alignment is undefined (typically columns and bars), display the individual
                 // point below or above the point depending on the threshold
                 options.align = pick(
-                    options.align, !inverted || inside ? 'center' : below ? 'right' : 'left'
+                    options.align,
+                    !inverted || inside ? 'center' : below ? 'right' : 'left'
                 );
                 options.verticalAlign = pick(
                     options.verticalAlign,
@@ -23699,22 +23728,28 @@
                     [1, 2, 5, 10, 20, 25, 50, 100, 200, 500] // allowed multiples
                 ],
                 [
-                    'second', [1, 2, 5, 10, 15, 30]
+                    'second',
+                    [1, 2, 5, 10, 15, 30]
                 ],
                 [
-                    'minute', [1, 2, 5, 10, 15, 30]
+                    'minute',
+                    [1, 2, 5, 10, 15, 30]
                 ],
                 [
-                    'hour', [1, 2, 3, 4, 6, 8, 12]
+                    'hour',
+                    [1, 2, 3, 4, 6, 8, 12]
                 ],
                 [
-                    'day', [1]
+                    'day',
+                    [1]
                 ],
                 [
-                    'week', [1]
+                    'week',
+                    [1]
                 ],
                 [
-                    'month', [1, 3, 6]
+                    'month',
+                    [1, 3, 6]
                 ],
                 [
                     'year',
@@ -25064,8 +25099,10 @@
 
                 scroller.scrollbarRifles = renderer.path(
                         swapXY([
-                            'M', -3, size / 4,
-                            'L', -3, 2 * size / 3,
+                            'M',
+                            -3, size / 4,
+                            'L',
+                            -3, 2 * size / 3,
                             'M',
                             0, size / 4,
                             'L',
@@ -25080,7 +25117,10 @@
 
 
                 scroller.scrollbarStrokeWidth = scroller.scrollbar.strokeWidth();
-                scroller.scrollbarGroup.translate(-scroller.scrollbarStrokeWidth % 2 / 2, -scroller.scrollbarStrokeWidth % 2 / 2);
+                scroller.scrollbarGroup.translate(
+                    -scroller.scrollbarStrokeWidth % 2 / 2,
+                    -scroller.scrollbarStrokeWidth % 2 / 2
+                );
 
                 // Draw the buttons:
                 scroller.drawScrollbarButton(0);
@@ -25455,7 +25495,9 @@
                 // Touch events
                 if (hasTouch) {
                     _events.push(
-                        [bar, 'touchstart', mouseDownHandler], [doc, 'touchmove', mouseMoveHandler], [doc, 'touchend', mouseUpHandler]
+                        [bar, 'touchstart', mouseDownHandler],
+                        [doc, 'touchmove', mouseMoveHandler],
+                        [doc, 'touchend', mouseUpHandler]
                     );
                 }
 
@@ -25788,15 +25830,20 @@
              */
             getHandlePath: function(inverted) {
                 return swapXY([
-                    'M', -4.5, 0.5,
+                    'M',
+                    -4.5, 0.5,
                     'L',
                     3.5, 0.5,
                     'L',
                     3.5, 15.5,
-                    'L', -4.5, 15.5,
-                    'L', -4.5, 0.5,
-                    'M', -1.5, 4,
-                    'L', -1.5, 12,
+                    'L',
+                    -4.5, 15.5,
+                    'L',
+                    -4.5, 0.5,
+                    'M',
+                    -1.5, 4,
+                    'L',
+                    -1.5, 12,
                     'M',
                     0.5, 4,
                     'L',
@@ -27461,11 +27508,11 @@
                         (actualRange >= {
                             month: 28,
                             year: 365
-                        }[type] * day * count) &&
+                        } [type] * day * count) &&
                         (actualRange <= {
                             month: 31,
                             year: 366
-                        }[type] * day * count)
+                        } [type] * day * count)
                     ) {
                         isSameRange = true;
                     } else if (type === 'ytd') {
@@ -27478,7 +27525,8 @@
                     // The new zoom area happens to match the range for a button - mark it selected.
                     // This happens when scrolling across an ordinal gap. It can be seen in the intraday
                     // demos when selecting 1h and scroll across the night gap.
-                    disable = (!allButtonsEnabled &&
+                    disable = (
+                        !allButtonsEnabled &&
                         (
                             isTooGreatRange ||
                             isTooSmallRange ||
@@ -27530,7 +27578,7 @@
                     rangeOptions._range = {
                         month: 30,
                         year: 365
-                    }[type] * 24 * 36e5 * count;
+                    } [type] * 24 * 36e5 * count;
                 }
             },
 
@@ -27961,7 +28009,7 @@
                 timeName = {
                     month: 'Month',
                     year: 'FullYear'
-                }[type],
+                } [type],
                 min,
                 max = this.max,
                 dataMin,
@@ -28412,7 +28460,7 @@
                 if (path.toString() === toPath.toString()) {
                     // #6166
                     result = path;
-                    result.flat = true;
+                    result.isFlat = true;
                 } else {
                     // Go over each subpath
                     for (i = 0; i < path.length; i += 6) {
@@ -28746,7 +28794,8 @@
         wrap(Series.prototype, 'render', function(proceed) {
             // Only do this on not 3d (#2939, #5904) nor polar (#6057) charts, and only
             // if the series type handles clipping in the animate method (#2975).
-            if (!(this.chart.is3d && this.chart.is3d()) &&
+            if (
+                !(this.chart.is3d && this.chart.is3d()) &&
                 !this.chart.polar &&
                 this.xAxis &&
                 !this.xAxis.isRadial // Gauge, #6192

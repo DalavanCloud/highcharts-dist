@@ -1,5 +1,5 @@
 /**
- * @license Highcharts JS v5.0.11 (2017-05-04)
+ * @license Highcharts JS v5.0.11 (2018-09-19)
  * Highstock as a plugin for Highcharts
  *
  * (c) 2017 Torstein Honsi
@@ -1142,22 +1142,28 @@
                     [1, 2, 5, 10, 20, 25, 50, 100, 200, 500] // allowed multiples
                 ],
                 [
-                    'second', [1, 2, 5, 10, 15, 30]
+                    'second',
+                    [1, 2, 5, 10, 15, 30]
                 ],
                 [
-                    'minute', [1, 2, 5, 10, 15, 30]
+                    'minute',
+                    [1, 2, 5, 10, 15, 30]
                 ],
                 [
-                    'hour', [1, 2, 3, 4, 6, 8, 12]
+                    'hour',
+                    [1, 2, 3, 4, 6, 8, 12]
                 ],
                 [
-                    'day', [1]
+                    'day',
+                    [1]
                 ],
                 [
-                    'week', [1]
+                    'week',
+                    [1]
                 ],
                 [
-                    'month', [1, 3, 6]
+                    'month',
+                    [1, 3, 6]
                 ],
                 [
                     'year',
@@ -2507,8 +2513,10 @@
 
                 scroller.scrollbarRifles = renderer.path(
                         swapXY([
-                            'M', -3, size / 4,
-                            'L', -3, 2 * size / 3,
+                            'M',
+                            -3, size / 4,
+                            'L',
+                            -3, 2 * size / 3,
                             'M',
                             0, size / 4,
                             'L',
@@ -2523,7 +2531,10 @@
 
 
                 scroller.scrollbarStrokeWidth = scroller.scrollbar.strokeWidth();
-                scroller.scrollbarGroup.translate(-scroller.scrollbarStrokeWidth % 2 / 2, -scroller.scrollbarStrokeWidth % 2 / 2);
+                scroller.scrollbarGroup.translate(
+                    -scroller.scrollbarStrokeWidth % 2 / 2,
+                    -scroller.scrollbarStrokeWidth % 2 / 2
+                );
 
                 // Draw the buttons:
                 scroller.drawScrollbarButton(0);
@@ -2898,7 +2909,9 @@
                 // Touch events
                 if (hasTouch) {
                     _events.push(
-                        [bar, 'touchstart', mouseDownHandler], [doc, 'touchmove', mouseMoveHandler], [doc, 'touchend', mouseUpHandler]
+                        [bar, 'touchstart', mouseDownHandler],
+                        [doc, 'touchmove', mouseMoveHandler],
+                        [doc, 'touchend', mouseUpHandler]
                     );
                 }
 
@@ -3231,15 +3244,20 @@
              */
             getHandlePath: function(inverted) {
                 return swapXY([
-                    'M', -4.5, 0.5,
+                    'M',
+                    -4.5, 0.5,
                     'L',
                     3.5, 0.5,
                     'L',
                     3.5, 15.5,
-                    'L', -4.5, 15.5,
-                    'L', -4.5, 0.5,
-                    'M', -1.5, 4,
-                    'L', -1.5, 12,
+                    'L',
+                    -4.5, 15.5,
+                    'L',
+                    -4.5, 0.5,
+                    'M',
+                    -1.5, 4,
+                    'L',
+                    -1.5, 12,
                     'M',
                     0.5, 4,
                     'L',
@@ -4904,11 +4922,11 @@
                         (actualRange >= {
                             month: 28,
                             year: 365
-                        }[type] * day * count) &&
+                        } [type] * day * count) &&
                         (actualRange <= {
                             month: 31,
                             year: 366
-                        }[type] * day * count)
+                        } [type] * day * count)
                     ) {
                         isSameRange = true;
                     } else if (type === 'ytd') {
@@ -4921,7 +4939,8 @@
                     // The new zoom area happens to match the range for a button - mark it selected.
                     // This happens when scrolling across an ordinal gap. It can be seen in the intraday
                     // demos when selecting 1h and scroll across the night gap.
-                    disable = (!allButtonsEnabled &&
+                    disable = (
+                        !allButtonsEnabled &&
                         (
                             isTooGreatRange ||
                             isTooSmallRange ||
@@ -4973,7 +4992,7 @@
                     rangeOptions._range = {
                         month: 30,
                         year: 365
-                    }[type] * 24 * 36e5 * count;
+                    } [type] * 24 * 36e5 * count;
                 }
             },
 
@@ -5404,7 +5423,7 @@
                 timeName = {
                     month: 'Month',
                     year: 'FullYear'
-                }[type],
+                } [type],
                 min,
                 max = this.max,
                 dataMin,
@@ -5855,7 +5874,7 @@
                 if (path.toString() === toPath.toString()) {
                     // #6166
                     result = path;
-                    result.flat = true;
+                    result.isFlat = true;
                 } else {
                     // Go over each subpath
                     for (i = 0; i < path.length; i += 6) {
@@ -6189,7 +6208,8 @@
         wrap(Series.prototype, 'render', function(proceed) {
             // Only do this on not 3d (#2939, #5904) nor polar (#6057) charts, and only
             // if the series type handles clipping in the animate method (#2975).
-            if (!(this.chart.is3d && this.chart.is3d()) &&
+            if (
+                !(this.chart.is3d && this.chart.is3d()) &&
                 !this.chart.polar &&
                 this.xAxis &&
                 !this.xAxis.isRadial // Gauge, #6192
